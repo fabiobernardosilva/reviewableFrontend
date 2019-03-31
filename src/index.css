@@ -1,14 +1,316 @@
+@font-face {
+  font-family: 'MiradorBold';
+  src: url('./webfontkit-20190315-195300/rene_bieder_-_mirador_book_demo_bold-webfont.woff2') format('woff2'),
+       url('./webfontkit-20190315-195300/rene_bieder_-_mirador_book_demo_bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Mirador';
+  src: url('./webfontkit-20190315-195300/rene_bieder_-_mirador-bookdemo-webfont.woff2') format('woff2'),
+       url('./webfontkit-20190315-195300/rene_bieder_-_mirador-bookdemo-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+::selection {
+  background: #ffeb5a; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ffeb5a; /* Gecko Browsers */
+}
+
+p{
+ margin: 0;
+/*
+  color: #11003f;
+  */
+}
+
+h1 {
+}
+
+html{
+  background-color: #00ff9d;
+}
+
+.header {
+  top: 0;
+  height: 50px;
+  width: 100%;  
+  background-color:  #11003f;
+  padding: 15px;
+}
+
+.content{
+  /*
+  background-color: cornflowerblue;
+  */
+  background-color: gainsboro;
+  padding: 50px;
+  height: 100vh;
+  overflow: scroll;
+  /*
+  THE BEST EASIEST WAY TO VERTICALLY ALIGN!
+  */
+  display: grid;
+  }
+
+
+@media only screen and (max-width: 600px) {
+  .content {
+    padding: 20px 10px;
+
+  }
+
+  .header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 28px;
+  }
+
+  .header {
+    height: 60px;
+  }
+}
+
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-family: 'MiradorBold';
+  /*
+  color: #11003f;
+  */
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Mirador';
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Mirador';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 500px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+
+
+.footer {
+  margin: 0;
+  height: auto;
+  width: 100%;
+  background-color: #11003f;
+  padding: 15px;
+  /*padding: 0px 20px;*/
+  
+}
+
+.success{
+  max-width: 800px;
+  width: 97%;
+  margin: auto;
+  padding: 25px 50px 50px 50px;
+  border-radius: 0px;
+    text-align:center;
+}
+
+.questionnaire {
+  max-width: 800px;
+  width: 97%;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px 50px 50px 50px;
+  border-radius: 0px;
+}
+
+textarea:focus, button:focus, input:focus {
+  outline: none;
+  /*background-color: #00ff9d;*/
+  
+}
+
+button:hover {
+  background-color: #00ff9d;
+}
+
+textarea {
+  margin: 25px 0px 0px 0px;
+  font-size: 32px;
+  background-color: gainsboro;
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 0px;
+  padding: 10px;
+  resize: none;
+}
+
+input {
+  margin: 0px 0px 0px 0px;
+  font-size: 32px;
+  background-color: gainsboro;
+  width: 100%;
+  border: none;
+  border-radius: 0px;
+  padding: 10px;
+  resize: none;
+}
+
+button{
+  margin-top:40px; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  font-weight: bold;
+  width: 200px;
+  height: 50px;
+  border: none;
+  background-color: #00ff9d;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.grid {
+  margin: 25px 0px 0px 0px;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 50% 50%; 
+  margin: 0px 50px;
+}
+
+.dot {
+  margin-left: auto;
+  margin-right: auto;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: block;
+  opacity: 1;
+  margin-top: 10px;
+  cursor: pointer;
+  border: 2px solid gainsboro;
+}
+
+.checkbox {
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 25px;
+  height: 25px;
+  width: 25px;
+  background-color: gainsboro;
+  display: inline-block;
+  opacity: 1;
+  position: relative;
+  top: 5px;
+}
+
+.dot:hover, .checkbox:hover{
+  opacity:1;
+}
+
+
+#excellent {
+  border: 2px solid #00ff9d;
+}
+
+#good {
+  border: 2px solid
+  #7bff5f;
+}
+
+#average {
+  border: 2px solid
+  #ffeb5a;
+}
+
+#poor{
+  border: 2px solid
+  #ff9239;
+}
+
+#bad{
+  border: 2px solid
+  #ff4a4a;
+}
+
+.center {
+  text-align: center;
+}
+
+
+.centerDiv{
+  display: inline;
+  margin-left: auto;
+  margin-right:auto;
+  /*
+  display: grid;
+  grid-template-columns: 50% 50%
+  */
+}
+
+.centerDiv img {
+margin: 0px 10px;
+}
+
+.gridContainer {
+  font-size: 12px;
+  text-align: center;
+
+}
+
+.gridContainer input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.gridContainer input:checked ~ #excellent {
+  background-color:  #00ff9d;
+}
+
+
+.gridContainer input:checked ~ #good{
+  background-color:  #7bff5f;
+}
+
+.gridContainer input:checked ~ #average {
+  background-color:  #ffeb5a;
+}
+
+
+.gridContainer input:checked ~ #poor{
+  background-color:  #ff9239;
+}
+
+
+.gridContainer input:checked ~ #bad {
+  background-color:  #ff4a4a;
+
+}
+
+.gridContainer input:checked ~ #recommendation {
+  background-color: gainsboro;
+
+}
+
