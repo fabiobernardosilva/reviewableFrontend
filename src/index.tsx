@@ -9,14 +9,15 @@ import { Questionnaire } from './components/questionnaire/questionnaire';
 //import { Identification } from './components/identification/identification';
 import { Success } from './components/success/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { School } from './components/school/school';
 
 const school = "ABCD English";
 const questionnaireIdentificationPage =
     <div>
         <Header />
         <div className='content'>
-            <Questionnaire school={school}/>
-            </div>
+            <Questionnaire school={school} />
+        </div>
         <Footer />
     </div>;
 
@@ -29,13 +30,25 @@ const successPage =
         </div>
         <Footer />
     </div>
-    
+
 ReactDOM.render(
     <div>{questionnaireIdentificationPage}
-    
-   {successPage}</div>
-   
+
+        {successPage}</div>
+
     , document.getElementById('root'));
+
+ReactDOM.render(
+    <div>
+    <Header />
+    <div className='content'>
+<School schoolId={1}></School>
+</div>
+        <Footer />
+    </div>
+    
+    , document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -127,11 +127,7 @@ with reviewable later and have your review published.<br />
             return json;
         };
 
-        async function getSchoolById(id: number){
-            const response = await fetch(`/schools/${id}`);
-            const json = response.json();
-            return json;
-        };
+      
     }
 
 }
