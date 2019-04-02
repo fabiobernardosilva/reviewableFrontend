@@ -42,7 +42,7 @@ ReactDOM.render(
     <div>
     <Header />
     <div className='content'>
-<School schoolId={1}></School>
+<School schoolId={2}></School>
 </div>
         <Footer />
     </div>
