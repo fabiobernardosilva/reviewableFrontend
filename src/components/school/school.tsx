@@ -40,13 +40,8 @@ export class School extends React.Component<SchoolProps, SchoolState>{
     public componentDidMount() {
         (async () => {
             const data = await getSchoolById(this.props.schoolId);
-            //const jsonData = JSON.stringify(data);
             this.setState({ school: data });
-            //alert(JSON.stringify(await getSchoolById(this.props.schoolId)))
-
         })();
-
-        //(async()=>{await alert(this.state.reviews.schoolId)})();
     }
 
     render() {
@@ -61,19 +56,15 @@ export class School extends React.Component<SchoolProps, SchoolState>{
 
                     <h3>Reviews</h3>
 
-
                     <Review
                         items={
                             this.state.school.reviews.map((reviews) => {
                                 return <div>
                                     {reviews.reviewerName}<br />
-                                    {reviews.comment}<br />
-                                    {reviews.teacher}<br />
-                                    {reviews.facilities}<br />
-                                    {reviews.staff}<br />
-                                </div>;
-                                <div>
-
+                                    <p style={{ fontSize: 32 }}>{reviews.comment}</p>
+                                    teacher: {reviews.teacher}<br />
+                                    facilities: {reviews.facilities}<br />
+                                    staff: {reviews.staff}<br />
                                 </div>;
                             })
                         }
@@ -88,10 +79,4 @@ async function getSchoolById(id: number) {
     const response = await fetch(`/schools/${id}`);
     const json = await response.json();
     return json as SchoolItem;
-};
-
-async function getAllReviews() {
-    const response = await fetch("/reviews");
-    const json = await response.json();
-    return json as ReviewItem[];
 };

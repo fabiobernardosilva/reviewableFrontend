@@ -5,13 +5,12 @@ interface ReviewProps {
 }
 
 interface ReviewState {
-    //
 }
 
 export class Review extends React.Component<ReviewProps, ReviewState> {
     public render() {
         if (this.props.items.length < 1) {
-            return <div>There is no items!</div>;
+            return <div>No reviews yet!</div>;
         } else {
             return <ul>
                 {this.props.items.map(function (item) {

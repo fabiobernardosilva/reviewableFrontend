@@ -186,7 +186,7 @@ button{
 }
 
 .grid {
-  margin: 25px 0px 0px 0px;
+  margin: 25px 0px 50px 0px;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   
