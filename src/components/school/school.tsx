@@ -66,7 +66,7 @@ export class School extends React.Component<SchoolProps, SchoolState>{
                     <div className="reviewCardList">
                     <Review
                         items={
-                            this.state.school.reviews.map((reviews) => {
+                            this.state.school.reviews.reverse().map((reviews) => {
                                 return <div>
                                     Posted by <strong>{reviews.reviewerName}</strong> on {reviews.time}
                                     <p style={{ fontSize: 32 }}>{reviews.comment}</p>
