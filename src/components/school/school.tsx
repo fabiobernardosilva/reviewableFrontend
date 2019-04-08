@@ -45,6 +45,8 @@ export class School extends React.Component<SchoolProps, SchoolState>{
         })();
     }
 
+   
+
     render() {
         if (this.state.school === null) {
             return <div>loading...</div>
@@ -54,10 +56,10 @@ export class School extends React.Component<SchoolProps, SchoolState>{
                 <div className="questionnaire">
                     <h1 className="center">{this.state.school.schoolName}</h1>
                     <a  href={this.state.school.website}><p className="center">{this.state.school.website}</p></a><br/>
-                    <h4>Total reviews: X</h4>
-                    <h4>School verified reviews: X</h4>
-                    <h4>reviewable verified reviews: X</h4>
-                    <h3>X students recommend this school</h3>
+                    <p>Total reviews: X</p>
+                    <p>School verified reviews: X</p>
+                    <p>reviewable verified reviews: X</p><br/>
+                    <p>X students recommend this school</p>
                     <button onClick={() => {alert("TO DO")}}>Leave a review</button>
 
                     
@@ -68,12 +70,13 @@ export class School extends React.Component<SchoolProps, SchoolState>{
                         items={
                             this.state.school.reviews.reverse().map((reviews) => {
                                 return <div>
-                                    Posted by <strong>{reviews.reviewerName}</strong> on {reviews.time}
+                                    Posted by <strong>{reviews.reviewerName}</strong> on {reviews.time}<br/><br/>
                                     <p style={{ fontSize: 32 }}>{reviews.comment}</p>
                                     teacher: {reviews.teacher}<br />
                                     facilities: {reviews.facilities}<br />
                                     staff: {reviews.staff}<br />
                                     <br/>
+
                                     <p>Review verified by {this.props.schoolId}</p>
                                 </div>;
                             })
