@@ -1,6 +1,8 @@
 import React from 'react';
 import { Question } from "../question/question";
 import * as joi from "joi";
+import * as H from 'history';
+
 
 const identificationJoiSchema = {
     /* this validate the email input, the line minDomainAtoms: 2 makes sure
@@ -8,11 +10,19 @@ const identificationJoiSchema = {
     reviewerName: joi.string().required().label("Full name"),
     email: joi.string().email({ minDomainAtoms: 2 }).required().label("Email address"),
     dOB: joi.date().required().label("Date of birth")
+};
+
+const reviewJoiSchema = {
+    teacher: joi.number().min(1).max(5).required().label("Teacher"),
+    facilities: joi.number().min(1).max(5).required().label("Facilities"),
+    staff: joi.number().min(1).max(5).required().label("Staff"),
+    recommendation: joi.number().min(0).max(1).required().label("Recommendation")
 
 };
 
 interface QuestionnaireProps {
     school: string;
+    history?: H.History;
 }
 
 interface QuestionnaireState {
@@ -20,12 +30,12 @@ interface QuestionnaireState {
     questionOne: number;
     questionTwo: number;
     questionThree: number;
-    recommendation: boolean;
+    recommendation: number;
     comment: string;
     reviewerName: string;
     email: string;
     dOB: string;
-}
+}   
 
 export class Questionnaire extends React.Component<QuestionnaireProps, QuestionnaireState>{
     public constructor(props: QuestionnaireProps) {
@@ -35,7 +45,7 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
             questionOne: 0,
             questionTwo: 0,
             questionThree: 0,
-            recommendation: false,
+            recommendation: -1,
             comment: "",
             reviewerName: "",
             email: "",
@@ -66,33 +76,24 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
 
                 <form>
                     <h1>Review {this.props.school}</h1>
-                    <p style={{ fontSize: '24px' }}>This is the questionnarie for reviewing {this.props.school}.
-                    <strong><span style={{ color: 'red' }}>*</span></strong>required</p>
+                    <p style={{ fontSize: '24px' }}>Use the questionnaire below to evaluate your experience at <strong>{this.props.school}</strong>. You can optionally choose to leave a comment to complement your review! 
+                    </p>
                     <br/>
 
-                    <Question selectedValue={this.state.questionOne} onChange={(val) => this.setState({ questionOne: val })} school={this.props.school} questionTitle="Evaluate the teacher at" questionDescription="Take into account things like: How well does the instructor
+                    <Question numberOfOptions={5} selectedValue={this.state.questionOne} onChange={(val) => this.setState({ questionOne: val })} school={this.props.school} questionTitle="Evaluate the teacher at" questionDescription="Take into account things like: How well does the instructor
                     teach? How knowledgeable is your instructor? How clearly
                     does he/she explain the course material? How concerned
                     he/she was that students were learning the material? How
                     organised and prepared he/she is for the classes? How well
                     does your instructor answer students’ questions?" radioName="teacher"> </Question>
 
-                    <Question selectedValue={this.state.questionTwo} onChange={(val) => this.setState({ questionTwo: val })} school={this.props.school} questionTitle="Evaluate the facilities at" questionDescription="How well-maintained are the school facilities?" radioName="facilities"> </Question>
+                    <Question numberOfOptions={5} selectedValue={this.state.questionTwo} onChange={(val) => this.setState({ questionTwo: val })} school={this.props.school} questionTitle="Evaluate the facilities at" questionDescription="How well-maintained are the school facilities?" radioName="facilities"> </Question>
 
-                    <Question selectedValue={this.state.questionThree} onChange={(val) => this.setState({ questionThree: val })} school={this.props.school} questionTitle="Evaluate the staff at" questionDescription="How helpful and friendly was the staff? How easy is to obtain
+                    <Question numberOfOptions={5} selectedValue={this.state.questionThree} onChange={(val) => this.setState({ questionThree: val })} school={this.props.school} questionTitle="Evaluate the staff at" questionDescription="How helpful and friendly was the staff? How easy is to obtain
                     resources you need?" radioName="staff"> </Question>
 
-                    <h3>Do you recommend {this.props.school}?<span style={{ color: 'red' }}>*</span></h3>
-                    <div className='grid2'>
-                        <label className="gridContainer">Yes
-                        <input type="radio" name="recommendation" />
-                            <span className="dot" id='recommendation'></span>
-                        </label>
-                        <label className="gridContainer">No
-                        <input type="radio" name="recommendation" />
-                            <span className="dot" id='recommendation'></span>
-                        </label>
-                    </div>
+                    <Question numberOfOptions={2} selectedValue={this.state.recommendation} onChange={(val) => this.setState({ recommendation: val })} school={this.props.school} questionTitle="Do you recommend"  radioName="recommendation"> </Question>
+                    
                     <br />
                     <h3>Would you like to leave a comment?</h3>
                     <p>Comments are optional.
@@ -100,7 +101,13 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
                     <textarea onKeyUp={(e) => this.updateComment((e as any).target.value)}>
                         
                     </textarea>
-                    <button onClick={() => {alert(this.state.comment)}}>Continue</button>
+
+                    <br/>
+                    <h2 style={{textAlign: "center"}}>
+                    {this.renderReviewValidationErrors()}
+                    </h2>
+
+                    
              
                    
                     <h1>Finally...</h1>
@@ -124,32 +131,37 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
                     <input type='date' onKeyUp={(e) => this.updateDOB((e as any).target.value)}placeholder=''></input>
 
                     <p><span className="checkbox"></span> I have read and accept reviewable's <a onClick={() => { alert('TO DO'); }} href=''>Terms and Conditions</a> and <a onClick={() => { alert('TO DO'); }} href=''>Privacy Policy</a>.</p>
-
-                    <h2 style={{color: "red"}}>
-                    {this.renderValidationErrors()}
+                    <br/>
+                    <h2 style={{textAlign: "center"}}>
+                    {this.renderIdentificationValidationErrors()}
                     </h2>
-                    <button onClick={async () => { 
-                        
-                        const data = await createReview(
-                            this.state.reviewerName,
-                            this.state.email,
-                            this.state.dOB,
-                            true,
-                            this.state.questionOne.toString(),
-                            this.state.questionTwo.toString(),
-                            this.state.questionThree.toString(),
-                            this.state.comment,
-                            1
-                        );
-                        alert(JSON.stringify(data));
-                        
-                    }}>Leave review</button>   
+                      
    </form>
    </div>
 }
 }
 
-private renderValidationErrors() {
+private renderReviewValidationErrors() {
+    const validationResult = joi.validate({
+        teacher: this.state.questionOne,
+        facilities: this.state.questionTwo,
+        staff: this.state.questionThree,
+        recommendation: this.state.recommendation
+    }, reviewJoiSchema);
+
+    if (validationResult.error) {
+        return <div style={{color: "#ff4a4a"}}>
+            <br/>
+            {validationResult.error.details.map(d => <div>{d.message}</div>)
+            
+        }<br/>
+        </div>;
+    } else {
+        return <button onClick={() => {alert(this.state.comment)}}>Continue</button>;
+    }
+}
+
+private renderIdentificationValidationErrors() {
     const validationResult = joi.validate({
         reviewerName: this.state.reviewerName,
         email: this.state.email,
@@ -157,11 +169,39 @@ private renderValidationErrors() {
     }, identificationJoiSchema);
 
     if (validationResult.error) {
-        return <div>
+        return <div style={{color: "#ff4a4a"}}>
+        <br/>
             {validationResult.error.details.map(d => <div>{d.message}</div>)}
         </div>;
     } else {
-        return <div>OK!</div>;
+        return <button onClick={async () => { 
+                        
+            const data = await createReview(
+                this.state.reviewerName,
+                this.state.email,
+                this.state.dOB,
+                
+                this.state.recommendation,
+                this.state.questionOne,
+                this.state.questionTwo,
+                this.state.questionThree,
+                this.state.comment,
+
+                // this is the school id that must be passed as props
+                1,
+
+                // verification of the review, always set to -1 when a review is created
+                -1,
+
+                // post status of review: set to null until verified and posted
+                -1
+            );
+            alert(JSON.stringify(data));
+
+            // NOW I NEED TO REDIRECT IT TO THE SUCCESS PAGE
+            // this.props.history.push("/success");
+            
+        }}>Leave review</button> ;
     }
 }
 
@@ -172,12 +212,16 @@ async function createReview(
     reviewerName: string, //this is the reviewer name
     email: string,
     dOB: string,
-    recommendation: boolean,
-    teacher: string,
-    facilities: string,
-    staff: string,
+
+    recommendation: number,
+    teacher: number,
+    facilities: number,
+    staff: number,
     comment: string,
-    schoolSchoolId: number
+    schoolSchoolId: number,
+
+    verificationStatus: number,
+    postStatus: number 
     )
     {
         const data = {
@@ -189,7 +233,9 @@ async function createReview(
         facilities: facilities,
         staff: staff,
         comment: comment,
-        schoolSchoolId: schoolSchoolId
+        schoolSchoolId: schoolSchoolId,
+        verificationStatus: verificationStatus,
+        postStatus: postStatus
     };
     
     const response = await fetch("/reviews",

@@ -3,10 +3,11 @@ import React from "react";
 interface QuestionProps {
     school: string,
     questionTitle: string,
-    questionDescription: string,
+    questionDescription?: string,
     radioName: string,
     selectedValue: number,
-    onChange: (selectedValue: number) => void
+    onChange: (selectedValue: number) => void,
+    numberOfOptions: number
 
 }
 interface QuestionState {
@@ -22,6 +23,7 @@ export class Question extends React.Component<QuestionProps, QuestionState>{
     }
 
     render() {
+        if(this.props.numberOfOptions === 5){
         return <div>
             <h3>{this.props.questionTitle} {this.props.school}<span style={{ color: 'red' }}>*</span></h3>
             <p>{this.props.questionDescription}</p>
@@ -49,5 +51,25 @@ export class Question extends React.Component<QuestionProps, QuestionState>{
                 </label>
             </div>
         </div>
+        }
+        if(this.props.numberOfOptions === 2){
+            return <div>
+                <h3>{this.props.questionTitle} {this.props.school}?<span style={{ color: 'red' }}>*</span></h3>
+                    
+                    <div className='grid'>
+                        <label/>
+                        <label onClick={() => { this.getValue(1) }} className="gridContainer">Yes
+                        <input type="radio" name={this.props.radioName} />
+                            <span className="dot" id='recommendation'></span>
+                        </label>
+                        <label/>
+                        <label onClick={() => { this.getValue(0) }} className="gridContainer">No
+                        <input type="radio" name={this.props.radioName} />
+                            <span className="dot" id='recommendation'></span>
+                        </label>
+                        <label/>
+                    </div>
+            </div>
+        }
     }
 }

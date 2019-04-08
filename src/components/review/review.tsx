@@ -12,11 +12,11 @@ export class Review extends React.Component<ReviewProps, ReviewState> {
         if (this.props.items.length < 1) {
             return <div>No reviews yet!</div>;
         } else {
-            return <ul>
+            return <div >
                 {this.props.items.map(function (item) {
-                    return <li>{item}</li>;
+                    return <div className="reviewCard">{item}</div>;
                 })}
-            </ul>;
+            </div>;
         }
     }
 }

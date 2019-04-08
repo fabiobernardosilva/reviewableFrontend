@@ -34,8 +34,6 @@ ReactDOM.render(
         {successPage}</div>
     , document.getElementById('root'));
 
-
-
 ReactDOM.render(
     <div>{questionnaireIdentificationPage}
         {successPage}</div>
@@ -59,11 +57,13 @@ ReactDOM.render(<BrowserRouter>
     <Link to="/">Search</Link>
     <Link to="/review">Review</Link>
     <Link to="/success">Success</Link>
+    <Link to="/school/1">School</Link>
     </div>
 <Switch>
     <Route exact path="/" component={Search}/>
-    <Route exact path="/review" render={()=><Questionnaire school="ABCD"/>}/>
-    <Route exact path="/success" render={()=><Success school="ABCD"/>}/>
+    <Route exact path="/review" render={()=><Questionnaire school="ABC Dublin English"/>}/>
+    <Route exact path="/success" render={()=><Success school="ABCD Dublin English"/>}/>
+    <Route exact path="/school/1" render={() => <School schoolId={1}></School>}/>
 </Switch>
 </div>
 <Footer/>

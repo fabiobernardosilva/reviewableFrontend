@@ -49,7 +49,7 @@ html{
   background-color: cornflowerblue;
   */
   background-color: gainsboro;
-  padding: 50px;
+  padding: 0px 50px;
   height: 100vh;
   overflow: scroll;
   /*
@@ -58,10 +58,43 @@ html{
   display: grid;
   }
 
+  .questionnaire {
+    max-width: 800px;
+    width: 97%;
+    background-color: white;
+    
+    padding: 25px 50px 50px 50px;
+    border-radius: 0px;
+    margin: 50px auto;
+  }
+
+  .reviewCard {
+    max-width: 800px;
+    
+    background-color: white;
+    
+    padding: 50px;
+    
+    margin: 10px 0px;
+  }
+
+  .reviewCardList {
+    max-width: 800px;
+    width: 97%;
+    
+    
+    border-radius: 0px;
+    margin: 50px auto;
+  }
 
 @media only screen and (max-width: 600px) {
+
+  .questionnaire {
+    margin: 10px;
+  }
+
   .content {
-    padding: 20px 10px;
+    padding: 0px;
 
   }
 
@@ -74,6 +107,10 @@ html{
 
   .header {
     height: 60px;
+  }
+
+  .reviewCardList {
+    margin: 10px;
   }
 }
 
@@ -127,15 +164,7 @@ code {
     text-align:center;
 }
 
-.questionnaire {
-  max-width: 800px;
-  width: 97%;
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 25px 50px 50px 50px;
-  border-radius: 0px;
-}
+
 
 textarea:focus, button:focus, input:focus {
   outline: none;
@@ -192,10 +221,11 @@ button{
   
 }
 
+/*Not currently in use*/
 .grid2 {
   display: grid;
   grid-template-columns: 50% 50%; 
-  margin: 0px 50px;
+  margin: 0px 45px;
 }
 
 .dot {

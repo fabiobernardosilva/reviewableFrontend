@@ -11,6 +11,7 @@ interface ReviewItem {
     facilities: string;
     staff: string;
     comment: string;
+    time: Date;
 }
 
 interface SchoolItem {
@@ -51,26 +52,36 @@ export class School extends React.Component<SchoolProps, SchoolState>{
 
             return <div>
                 <div className="questionnaire">
-                    <h1>{this.state.school.schoolName}</h1>
-                    <a href={this.state.school.website}>{this.state.school.website}</a>
+                    <h1 className="center">{this.state.school.schoolName}</h1>
+                    <a  href={this.state.school.website}><p className="center">{this.state.school.website}</p></a><br/>
+                    <h4>Total reviews: X</h4>
+                    <h4>School verified reviews: X</h4>
+                    <h4>reviewable verified reviews: X</h4>
+                    <h3>X students recommend this school</h3>
+                    <button onClick={() => {alert("TO DO")}}>Leave a review</button>
 
-                    <h3>Reviews</h3>
-
+                    
+                </div>
+                <h1 className="center">Reviews</h1>
+                    <div className="reviewCardList">
                     <Review
                         items={
                             this.state.school.reviews.map((reviews) => {
                                 return <div>
-                                    {reviews.reviewerName}<br />
+                                    Posted by <strong>{reviews.reviewerName}</strong> on {reviews.time}
                                     <p style={{ fontSize: 32 }}>{reviews.comment}</p>
                                     teacher: {reviews.teacher}<br />
                                     facilities: {reviews.facilities}<br />
                                     staff: {reviews.staff}<br />
+                                    <br/>
+                                    <p>Review verified by {this.props.schoolId}</p>
                                 </div>;
                             })
                         }
                     />
                 </div>
-            </div>
+                </div>
+                
         }
     }
 }
