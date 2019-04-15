@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// CSS Stylesheet
 import './index.css';
+
 import * as serviceWorker from './serviceWorker';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
@@ -8,8 +11,9 @@ import { Questionnaire } from './components/questionnaire/questionnaire';
 import { Success } from './components/success/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { School } from './components/school/school';
-import { Search } from './search/search';
+import { Search } from './components/search/search';
 
+/*
 const school = "ABCD English";
 const questionnaireIdentificationPage =
     <div>
@@ -48,22 +52,29 @@ ReactDOM.render(
             <Footer />
         </div>
         , document.getElementById('root'));
+        */
 
 ReactDOM.render(<BrowserRouter>
 <div>
     <Header/>
     <div className="content">
-    <div>
-    <Link to="/">Search</Link>
+        {/*
+         <Link to="/">Search</Link>
+    <Link to="/school/1">School</Link>
     <Link to="/review">Review</Link>
     <Link to="/success">Success</Link>
-    <Link to="/school/1">School</Link>
-    </div>
+        */}
 <Switch>
     <Route exact path="/" component={Search}/>
-    <Route exact path="/review" render={()=><Questionnaire school="ABC Dublin English"/>}/>
-    <Route exact path="/success" render={()=><Success school="ABCD Dublin English"/>}/>
-    <Route exact path="/school/1" render={() => <School schoolId={1}></School>}/>
+
+    {/*
+    <Route path="/review/:id" render={()=><Questionnaire school="CCT School"/>}/>
+    <Route path="/success" render={()=><Success school="ABCD Dublin English"/>}/>
+    <Route exact path="/schools/:id" render={() => <School schoolId={1}></School>}/>
+    */}
+    <Route path="/review/:id" component={Questionnaire}/>
+    <Route path="/success" component={Success}/>
+    <Route exact path="/schools/:id" component={School}/>
 </Switch>
 </div>
 <Footer/>

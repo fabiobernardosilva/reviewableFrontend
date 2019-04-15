@@ -9,7 +9,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
 
     render() {
         return <div className='header'>
-            <a href=''><img src={logo} height='18px;'></img></a>
+            <a href=''><img src={logo} height='18px;'/></a>
         </div>
     }
 }

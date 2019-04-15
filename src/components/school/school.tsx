@@ -1,15 +1,16 @@
 import React from 'react';
 import { Review } from '../review/review';
+import * as H from 'history';
 
 interface ReviewItem {
     reviewId: number;
     reviewerName: string;
     email: string;
     dOB: string;
-    recommendation: boolean;
-    teacher: string;
-    facilities: string;
-    staff: string;
+    recommendation: number;
+    teacher: number;
+    facilities: number;
+    staff: number;
     comment: string;
     time: Date;
 }
@@ -28,63 +29,89 @@ interface SchoolProps {
 interface SchoolState {
     //reviews: ReviewItem[] | null;
     school: SchoolItem | null;
+    
 }
 
-export class School extends React.Component<SchoolProps, SchoolState>{
-    public constructor(props: SchoolProps) {
-        super(props);
+export class School extends React.Component<any, SchoolState>{
+    public constructor(props: any) {
+        super(props);   
         this.state = {
             school: null
         };
     }
 
-    public componentDidMount() {
+    public componentWillMount() {
         (async () => {
-            const data = await getSchoolById(this.props.schoolId);
+            const data = await getSchoolById(this.props.match.params.id);
             this.setState({ school: data });
+
         })();
     }
 
-   
+
 
     render() {
         if (this.state.school === null) {
             return <div>loading...</div>
         } else {
 
-            return <div>
-                <div className="questionnaire">
-                    <h1 className="center">{this.state.school.schoolName}</h1>
-                    <a  href={this.state.school.website}><p className="center">{this.state.school.website}</p></a><br/>
-                    <p>Total reviews: X</p>
-                    <p>School verified reviews: X</p>
-                    <p>reviewable verified reviews: X</p><br/>
-                    <p>X students recommend this school</p>
-                    <button onClick={() => {alert("TO DO")}}>Leave a review</button>
+            // COUNT FUNCTION
+            const count = this.state.school.reviews.filter(review => review.recommendation === 1);
+            const recommendationCount = count.length;
 
-                    
+            return <div>
+
+                <div className="questionnaire">
+                    <div className="grid2">
+                        <div>
+                            <h1 className="schoolName">{this.state.school.schoolName}</h1>
+                            <a href={this.state.school.website}><p>{this.state.school.website}</p></a><br />
+                        </div>
+                        <div style={{ marginTop: "20px" }}>
+                            <p style={{ textAlign: "right"}}>Total reviews: X</p>
+                            <p style={{textAlign: "right"}}>School verified reviews: X</p>
+                            <p style={{textAlign: "right"}}>reviewable verified reviews: X</p><br />
+                        </div>
+                    </div>
+
+                    {/*
+                        CONDITIONAL RENDERING: 1 = Student / 0 or 2+ = students
+                    */}
+                    <br/>
+                    <p style={{fontSize: "32px", textAlign: "center" }}>{recommendationCount} {recommendationCount === 1 ? "student recommends" : "students recommend"} this school</p>
+
+                    <button onClick={() => { alert("TO DO") }}>Leave a review</button>
+
                 </div>
                 <h1 className="center">Reviews</h1>
-                    <div className="reviewCardList">
+                <div className="reviewCardList">
+
+
                     <Review
                         items={
                             this.state.school.reviews.reverse().map((reviews) => {
-                                return <div>
-                                    Posted by <strong>{reviews.reviewerName}</strong> on {reviews.time}<br/><br/>
-                                    <p style={{ fontSize: 32 }}>{reviews.comment}</p>
-                                    teacher: {reviews.teacher}<br />
-                                    facilities: {reviews.facilities}<br />
-                                    staff: {reviews.staff}<br />
-                                    <br/>
 
-                                    <p>Review verified by {this.props.schoolId}</p>
-                                </div>;
+                                // CONDITIONAL RENDERING
+                                return <div>
+                                    <p ><strong>{reviews.reviewerName}</strong> {reviews.recommendation === 1 ? "recommends " : "does not recommend "}
+                                    {this.props.schoolId}</p>
+                                    <p style={{}}>Review verified by {this.props.schoolId}</p>
+                                    <p style={{}}>{reviews.time}</p><br />
+
+                                    <p style={{ fontSize: 32 }}>{reviews.comment}</p><br/>
+                                    <div>
+                                       
+                                    <p style={{}}>teacher: {reviews.teacher}<br /></p>
+                                    <p style={{}}>facilities: {reviews.facilities}<br /></p>
+                                    <p style={{}}>staff: {reviews.staff}<br /></p>
+                                    </div>
+                                </div>
                             })
                         }
                     />
                 </div>
-                </div>
-                
+            </div>
+
         }
     }
 }

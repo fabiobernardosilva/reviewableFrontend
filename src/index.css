@@ -30,6 +30,13 @@ p{
 }
 
 h1 {
+
+
+
+}
+
+.schoolName {
+  margin-bottom: 0;
 }
 
 html{
@@ -66,12 +73,14 @@ html{
     padding: 25px 50px 50px 50px;
     border-radius: 0px;
     margin: 50px auto;
+   
   }
 
   .reviewCard {
     max-width: 800px;
     
-    background-color: white;
+  color: #11003f;
+  background-color: white;
     
     padding: 50px;
     
@@ -87,7 +96,17 @@ html{
     margin: 50px auto;
   }
 
+  .searchBar{
+    background-color: white;
+    width: 75%;
+    border-radius: 30px;
+  }
+
 @media only screen and (max-width: 600px) {
+
+  .searchBar{
+    width: 90%;
+  }
 
   .questionnaire {
     margin: 10px;
@@ -188,6 +207,7 @@ textarea {
   resize: none;
 }
 
+
 input {
   margin: 0px 0px 0px 0px;
   font-size: 32px;
@@ -221,11 +241,20 @@ button{
   
 }
 
-/*Not currently in use*/
 .grid2 {
   display: grid;
-  grid-template-columns: 50% 50%; 
-  margin: 0px 45px;
+  grid-template-columns: 50% 50%;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+}
+
+select {
+  width: 50%;
+  height: 50px;
+  font-size: 32px;
 }
 
 .dot {
@@ -283,7 +312,12 @@ button{
   #ff4a4a;
 }
 
+.verticalCenter{
+  display: grid;
+}
+
 .center {
+  padding-top: 50px;
   text-align: center;
 }
 
@@ -343,4 +377,5 @@ margin: 0px 10px;
   background-color: gainsboro;
 
 }
+
 

@@ -37,8 +37,9 @@ interface QuestionnaireState {
     dOB: string;
 }   
 
-export class Questionnaire extends React.Component<QuestionnaireProps, QuestionnaireState>{
-    public constructor(props: QuestionnaireProps) {
+export class Questionnaire extends React.Component<any, QuestionnaireState>{
+    
+    public constructor(props: any) {
         super(props);
         this.state = {
             firstPartComplete: false,
@@ -75,7 +76,7 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
                             
 
                 <form>
-                    <h1>Review {this.props.school}</h1>
+                    <h1>Review {this.props.match.params.id}</h1>
                     <p style={{ fontSize: '24px' }}>Use the questionnaire below to evaluate your experience at <strong>{this.props.school}</strong>. You can optionally choose to leave a comment to complement your review! 
                     </p>
                     <br/>
@@ -136,45 +137,78 @@ export class Questionnaire extends React.Component<QuestionnaireProps, Questionn
                     {this.renderIdentificationValidationErrors()}
                     </h2>
                       
-   </form>
-   </div>
-}
-}
-
-private renderReviewValidationErrors() {
-    const validationResult = joi.validate({
-        teacher: this.state.questionOne,
-        facilities: this.state.questionTwo,
-        staff: this.state.questionThree,
-        recommendation: this.state.recommendation
-    }, reviewJoiSchema);
-
-    if (validationResult.error) {
-        return <div style={{color: "#ff4a4a"}}>
-            <br/>
-            {validationResult.error.details.map(d => <div>{d.message}</div>)
-            
-        }<br/>
-        </div>;
-    } else {
-        return <button onClick={() => {alert(this.state.comment)}}>Continue</button>;
+                </form>
+            </div>
+        }
     }
-}
 
-private renderIdentificationValidationErrors() {
-    const validationResult = joi.validate({
-        reviewerName: this.state.reviewerName,
-        email: this.state.email,
-        dOB: this.state.dOB
-    }, identificationJoiSchema);
+    private renderReviewValidationErrors() {
+        const validationResult = joi.validate({
+            teacher: this.state.questionOne,
+            facilities: this.state.questionTwo,
+            staff: this.state.questionThree,
+            recommendation: this.state.recommendation
+        }, reviewJoiSchema);
 
-    if (validationResult.error) {
-        return <div style={{color: "#ff4a4a"}}>
-        <br/>
+        if (validationResult.error) {
+            return <div style={{color: "#ff4a4a"}}>
+                <br/>
+                {validationResult.error.details.map(d => <div>{d.message}</div>)
+                 }<br/>
+            </div>;
+        } else {
+            return <button onClick={() => {alert(this.state.comment)}}>Continue</button>;
+        }
+    }
+
+    private handleSubmit() {
+        try {
+            createReview(
+                this.state.reviewerName,
+                this.state.email,
+                this.state.dOB,
+                
+                this.state.recommendation,
+                this.state.questionOne,
+                this.state.questionTwo,
+                this.state.questionThree,
+                this.state.comment,
+
+                // this is the school id that must be passed as props
+                1,
+
+                // verification of the review, always set to -1 when a review is created
+                -1,
+
+                // post status of review: set to null until verified and posted
+                -1
+                );
+                //alert(JSON.stringify(data));
+        
+        }catch(err){
+            console.log(err);
+            //alert(JSON.stringify(err)
+        }
+    }
+
+    private renderIdentificationValidationErrors() {
+        const validationResult = joi.validate({
+            reviewerName: this.state.reviewerName,
+            email: this.state.email,
+            dOB: this.state.dOB
+        }, identificationJoiSchema);
+
+        if (validationResult.error) {
+            return <div style={{color: "#ff4a4a"}}>
+            <br/>
             {validationResult.error.details.map(d => <div>{d.message}</div>)}
-        </div>;
-    } else {
-        return <button onClick={async () => { 
+            </div>;
+        } else {
+            return <button onClick={()=>{
+                this.handleSubmit()
+            }}
+                
+                /*async () => { 
                         
             const data = await createReview(
                 this.state.reviewerName,
@@ -195,15 +229,17 @@ private renderIdentificationValidationErrors() {
 
                 // post status of review: set to null until verified and posted
                 -1
-            );
-            alert(JSON.stringify(data));
+                );
+                alert(JSON.stringify(data));
 
-            // NOW I NEED TO REDIRECT IT TO THE SUCCESS PAGE
-            // this.props.history.push("/success");
+                // NOW I NEED TO REDIRECT IT TO THE SUCCESS PAGE
+                // this.props.history.push("/success");
             
-        }}>Leave review</button> ;
+            }}*/
+        
+            >Leave review</button> ;
+        }
     }
-}
 
 }
 
