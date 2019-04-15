@@ -1,13 +1,6 @@
 import React from 'react';
 import * as H from 'history';
 import { withRouter } from 'react-router-dom';
-import { throws } from 'assert';
-
-//import { SearchBar } from '../searchbar/searchbar';
-//import { Header } from '../header/header';
-//import { School } from '../school/school';
-//import image from "../../students.jpg"
-//import { url } from 'inspector';
 
 interface School {
     schoolId: number;
@@ -87,29 +80,9 @@ export class SearchInternal extends React.Component<SearchProps, SearchState>{
         } else {
             return <div>ugh</div>
         }
-
     }
 
     private handleChange(value: string) {
-
-        //let schoolLowerCaseArray: School[] = [];
-        //let resultArray: School[] = [];
-        /*
-
-
-        // MAPPING SCHOOLS FROM DB INTO LOWER CASE
-        this.state.school.map(item => {
-            schoolLowerCaseArray.push({
-                schoolId: item.schoolId,
-                schoolName: item.schoolName.toLocaleLowerCase(),
-                website: item.website,
-            })
-        })
-
-        // FILTERING INPUT TO MATCH WITH LOWERCASE SCHOOLS
-        let data = schoolLowerCaseArray.filter(v => {
-            return v.schoolName.includes(value.toLocaleLowerCase());
-        });*/
 
         if (value.length >= 1) {
             let dataSimple = this.state.school.filter(v => {
@@ -120,77 +93,10 @@ export class SearchInternal extends React.Component<SearchProps, SearchState>{
         } else {
             this.setState({ searchResult: [] });
         }
-
-
-
-
-
-
-
-
-
-
-
-        //alert(JSON.stringify(this.state.searchResult))
-
-        /*
-        this.state.school.map((school) => {
-            dataSimple.map(v => {
-                //if (school.schoolId === v.schoolId) {
-                    let result = {
-                        schoolId: school.schoolId,
-                        schoolName: school.schoolName,
-                        website: school.website,
-                    }
-                    
-                    resultArray.push(result);
-                    this.setState({ searchResult: resultArray });
-                } 
-            //}
-            )
-        })
-        /*
-
-        //alert(value)
-
-        /*
-        if (value) {
-            if (value !== " ") {
-                {
-                    this.state.school.map((school) => {
-                        data.map(v => {
-                            if (school.schoolId === v.schoolId) {
-                                let result = {
-                                    schoolId: school.schoolId,
-                                    schoolName: school.schoolName,
-                                    website: school.website,
-                                }
-                                resultArray.push(result);
-                                this.setState({ searchResult: resultArray });
-                            }
-                        })
-                    })
-                }
-            }
-        }
-        */
-
-
-
     }
 
     private handleSubmit(id: number) {
         this.props.history.push(`/schools/${id}`)
-
-        /*
-            < Redirect
-        to = {{
-            pathname: "/schools/:id",
-                    state: { schoolId: id }
-        }
-    }
-/>
-*/
     }
 }
 
