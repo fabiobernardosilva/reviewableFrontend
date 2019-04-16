@@ -12,6 +12,7 @@ import { Success } from './components/success/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { School } from './components/school/school';
 import { Search } from './components/search/search';
+import {Page404} from './components/Page404/Page404';
 
 /*
 const school = "ABCD English";
@@ -56,8 +57,8 @@ ReactDOM.render(
 
 ReactDOM.render(<BrowserRouter>
 <div>
-    <Header/>
-    <div className="content">
+    {/* <Header/> */}
+    {/* <div className="content"> */}
         {/*
          <Link to="/">Search</Link>
     <Link to="/school/1">School</Link>
@@ -75,8 +76,9 @@ ReactDOM.render(<BrowserRouter>
     <Route path="/review/:id" component={Questionnaire}/>
     <Route path="/success" component={Success}/>
     <Route exact path="/schools/:id" component={School}/>
+    <Route component={Page404} />
 </Switch>
-</div>
+{/* </div> */}
 <Footer/>
 </div>
 </BrowserRouter>

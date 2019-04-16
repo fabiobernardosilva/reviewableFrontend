@@ -1,6 +1,8 @@
 import React from 'react';
 import * as H from 'history';
 import { withRouter } from 'react-router-dom';
+//import image from '../../students2.jpg'
+import logo from '../../reviewable_brand_positive.svg';
 
 interface School {
     schoolId: number;
@@ -40,19 +42,26 @@ export class SearchInternal extends React.Component<SearchProps, SearchState>{
 
     render() {
         if (this.state.school === null) {
-            return <div>...</div>
+            return <div>loading ...</div>
         } else {
-            return <div className="center">
-                {/*
-                <img style={{ width: "100%", opacity: 0.5}}src={image}/>
-                */}
-                <input style={{ textAlign: "center" }} className="searchBar" onKeyUp={(e) => this.handleChange((e as any).target.value)} type="text"></input>
+            
+            return <div className='contentSearch'>
+            <div style={{  
+                // boxShadow: "2px 2px 3px grey"
+}}className="backgroundImage">
+            <img style={{margin: "0 auto 15px auto"}}src={logo} height='35px;'/><br/>            
+            <input placeholder="Find your school here" style={{ paddingLeft: "25px", textAlign: "left" }} className="searchBar" onKeyUp={(e) => this.handleChange((e as any).target.value)} type="text"></input>
 
+            
                 
+                
+                
+                
+                <div className="searchResults">
                 {this.state.searchResult.map((school) => {
 
-                return <div style={{backgroundColor: "white", width: "75%", marginLeft: "auto", marginRight: "auto"}} onClick={() => { this.handleSubmit(school.schoolId) }}>
-                    <p style={{fontSize: "28px", lineHeight: "40px"}}>{school.schoolName}</p>
+                return <div style={{opacity: 1, width: "90%", marginLeft: "auto", marginRight: "auto"}} onClick={() => { this.handleSubmit(school.schoolId) }}>
+                    <p style={{fontSize: "28px", lineHeight: "40px"}}>{school.schoolName}  <span style={{fontSize: "14px"}}> | {school.website}</span></p>
                     </div>
                     })
                 }
@@ -60,8 +69,11 @@ export class SearchInternal extends React.Component<SearchProps, SearchState>{
                 {/* 
                 {this.renderResults()}
                 */}
-                
+                </div>
+                {/* <img style={{ width: "100%", opacity: 0.9}}src={image}/> */}
+                </div>
             </div>
+            
         }
     }
 

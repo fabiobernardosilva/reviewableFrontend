@@ -2,6 +2,7 @@ import React from 'react';
 import { Question } from "../question/question";
 import * as joi from "joi";
 import * as H from 'history';
+import { Header } from '../header/header';
 
 
 const identificationJoiSchema = {
@@ -72,7 +73,20 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
 
     render() {
         if(this.state.firstPartComplete === false){
-            return <div className='questionnaire'>
+
+            /*"Take into account things like: How well does the instructor
+            teach? How knowledgeable is your instructor? How clearly
+            does he/she explain the course material? How concerned
+            he/she was that students were learning the material? How
+            organised and prepared he/she is for the classes? How well
+            does your instructor answer students’ questions?"
+            */
+
+            return <div>
+                <Header/>
+            <div className='content'>
+            {/* <div className="backgroundImage"> */}
+            <div className='questionnaire'>
                             
 
                 <form>
@@ -81,12 +95,8 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
                     </p>
                     <br/>
 
-                    <Question numberOfOptions={5} selectedValue={this.state.questionOne} onChange={(val) => this.setState({ questionOne: val })} school={this.props.school} questionTitle="Evaluate the teacher at" questionDescription="Take into account things like: How well does the instructor
-                    teach? How knowledgeable is your instructor? How clearly
-                    does he/she explain the course material? How concerned
-                    he/she was that students were learning the material? How
-                    organised and prepared he/she is for the classes? How well
-                    does your instructor answer students’ questions?" radioName="teacher"> </Question>
+                    <Question numberOfOptions={5} selectedValue={this.state.questionOne} onChange={(val) => this.setState({ questionOne: val })} school={this.props.school} questionTitle="Evaluate the teacher at" questionDescription="How well does the instructor
+            teach? How knowledgeable is your instructor?" radioName="teacher"> </Question>
 
                     <Question numberOfOptions={5} selectedValue={this.state.questionTwo} onChange={(val) => this.setState({ questionTwo: val })} school={this.props.school} questionTitle="Evaluate the facilities at" questionDescription="How well-maintained are the school facilities?" radioName="facilities"> </Question>
 
@@ -98,7 +108,8 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
                     <br />
                     <h3>Would you like to leave a comment?</h3>
                     <p>Comments are optional.
-                    Please read <a onClick={() => { alert('DISPLAY CODE OF CONDUCT: TO DO'); }} href=''>reviewable code of conduct</a>. You have 512 characters left.</p>
+                    Please read <a onClick={() => {}} href=''>reviewable code of conduct</a>. You have 512 characters left.</p>
+                    
                     <textarea onKeyUp={(e) => this.updateComment((e as any).target.value)}>
                         
                     </textarea>
@@ -139,8 +150,11 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
                       
                 </form>
             </div>
+            </div>
+            </div>
+            {/* </div> */}
         }
-    }
+    }   
 
     private renderReviewValidationErrors() {
         const validationResult = joi.validate({

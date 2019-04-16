@@ -1,6 +1,7 @@
 import React from 'react';
 import { Review } from '../review/review';
 import * as H from 'history';
+import { Header } from '../header/header';
 
 interface ReviewItem {
     reviewId: number;
@@ -45,65 +46,97 @@ export class School extends React.Component<any, SchoolState>{
             const data = await getSchoolById(this.props.match.params.id);
             this.setState({ school: data });
 
+           
+
         })();
     }
 
 
 
     render() {
+        
         if (this.state.school === null) {
-            return <div>loading...</div>
+            return <div>
+                <Header/>
+            <div className='content'>
+                <h1 style={{textAlign: "center"}}>Loading...</h1>
+                </div>
+                </div>
         } else {
 
             // COUNT FUNCTION
             const count = this.state.school.reviews.filter(review => review.recommendation === 1);
             const recommendationCount = count.length;
 
-            return <div>
+            const totalCount = this.state.school.reviews.filter(review => review !== null);
+            const totalReviewCount = totalCount.length;
 
+            return <div>
+                <Header/>
+                <div className='content'>
+                {/* <div className="backgroundImage"> */}
                 <div className="questionnaire">
                     <div className="grid2">
                         <div>
                             <h1 className="schoolName">{this.state.school.schoolName}</h1>
-                            <a href={this.state.school.website}><p>{this.state.school.website}</p></a><br />
+                            <a href={this.state.school.website}>{this.state.school.website}</a><br />
                         </div>
                         <div style={{ marginTop: "20px" }}>
-                            <p style={{ textAlign: "right"}}>Total reviews: X</p>
-                            <p style={{textAlign: "right"}}>School verified reviews: X</p>
-                            <p style={{textAlign: "right"}}>reviewable verified reviews: X</p><br />
+                            <p style={{ textAlign: "right"}}>Total reviews: <strong>{totalReviewCount}</strong></p><br/>
+                            <p style={{ textAlign: "right"}}>School verified: <strong>{totalReviewCount}</strong></p>
+                            <p style={{ textAlign: "right"}}>reviewable verified: <strong>0</strong></p>
                         </div>
                     </div>
 
                     {/*
                         CONDITIONAL RENDERING: 1 = Student / 0 or 2+ = students
                     */}
-                    <br/>
-                    <p style={{fontSize: "32px", textAlign: "center" }}>{recommendationCount} {recommendationCount === 1 ? "student recommends" : "students recommend"} this school</p>
+                    
+                    <p style={{fontSize: "32px", margin: "30px 0px", textAlign: "center" }}><strong>{recommendationCount}</strong> {recommendationCount === 1 ? "student recommends" : "students recommend"} this school</p>
 
                     <button onClick={() => { alert("TO DO") }}>Leave a review</button>
 
                 </div>
-                <h1 className="center">Reviews</h1>
+                <h2 style={{}} className="center">Reviews for {this.state.school.schoolName}</h2>
                 <div className="reviewCardList">
 
 
                     <Review
+                    
+                    
                         items={
                             this.state.school.reviews.reverse().map((reviews) => {
 
+                                let teacherStyle = "style".concat(reviews.teacher.toString());
+                                let facilitiesStyle = "style".concat(reviews.facilities.toString());
+                                let staffStyle = "style".concat(reviews.staff.toString());
+
+                                (async()=>{
+                                   let school =  await getSchoolById(this.props.match.params.id);
+                                })();
+                               
+                                
+
                                 // CONDITIONAL RENDERING
                                 return <div>
-                                    <p ><strong>{reviews.reviewerName}</strong> {reviews.recommendation === 1 ? "recommends " : "does not recommend "}
-                                    {this.props.schoolId}</p>
-                                    <p style={{}}>Review verified by {this.props.schoolId}</p>
-                                    <p style={{}}>{reviews.time}</p><br />
-
-                                    <p style={{ fontSize: 32 }}>{reviews.comment}</p><br/>
+                                    <div className="grid2">
                                     <div>
-                                       
-                                    <p style={{}}>teacher: {reviews.teacher}<br /></p>
-                                    <p style={{}}>facilities: {reviews.facilities}<br /></p>
-                                    <p style={{}}>staff: {reviews.staff}<br /></p>
+                                    <p className={reviews.recommendation === 1 ? "style5 " : "style1"}><strong>{reviews.reviewerName}</strong> {reviews.recommendation === 1 ? "recommends " : "does not recommend "}
+                                    {this.props.match.params.id}</p>
+                                    <p style={{}}>Review verified by {this.props.match.params.id}</p>
+                                    </div>
+                                    <div>
+                                    <p style={{textAlign: "right"}}>{reviews.time.toString().slice(0,-14)}</p>
+                                    </div>
+                                    </div>
+                                  
+
+                                    <p style={{ fontSize: 32, margin: "30px 0px"}}>{reviews.comment}</p>
+                                    <div className="grid3">
+                                        
+                                    <p style={{textAlign: "left"}}>teacher: <span style={{fontSize: "28px"}}className={teacherStyle}><strong>{reviews.teacher}</strong></span><br /></p>
+                                    <p style={{textAlign: "center"}}>facilities: <span style={{fontSize: "28px"}}className={facilitiesStyle}><strong>{reviews.facilities}</strong></span><br /></p>
+                                    <p  style={{textAlign: "right"}}>staff: <span style={{fontSize: "28px"}} className={staffStyle}><strong>{reviews.staff}</strong></span><br /></p>
                                     </div>
                                 </div>
                             })
@@ -111,6 +144,8 @@ export class School extends React.Component<any, SchoolState>{
                     />
                 </div>
             </div>
+            </div>
+            // </div>
 
         }
     }

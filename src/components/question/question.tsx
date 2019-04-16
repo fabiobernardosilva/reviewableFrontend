@@ -29,23 +29,23 @@ export class Question extends React.Component<QuestionProps, QuestionState>{
             <p>{this.props.questionDescription}</p>
 
             <div className='grid'>
-                <label onClick={() => { this.getValue(5) }} className='gridContainer'>5: Excellent
+                <label onClick={() => { this.getValue(5) }} className='gridContainer'>Excellent: <strong>5</strong>
                         <input type="radio" name={this.props.radioName} />
                     <span className="dot" id='excellent'></span>
                 </label>
-                <label onClick={() => { this.getValue(4) }} className="gridContainer">4: Good
+                <label onClick={() => { this.getValue(4) }} className="gridContainer">Good: <strong>4</strong>
                         <input type="radio" name={this.props.radioName} />
                     <span className="dot" id='good'></span>
                 </label>
-                <label onClick={() => { this.getValue(3) }} className="gridContainer">3: Average
+                <label onClick={() => { this.getValue(3) }} className="gridContainer">Average: <strong>3</strong>
                         <input type="radio" name={this.props.radioName} />
                     <span className="dot" id='average'></span>
                 </label>
-                <label onClick={() => { this.getValue(2) }} className="gridContainer">2: Poor
+                <label onClick={() => { this.getValue(2) }} className="gridContainer">Poor: <strong>2</strong>
                         <input type="radio" name={this.props.radioName} />
                     <span className="dot" id='poor'></span>
                 </label>
-                <label onClick={() => { this.getValue(1) }} className="gridContainer">1: Bad
+                <label onClick={() => { this.getValue(1) }} className="gridContainer">Bad: <strong>1</strong>
                         <input type="radio" name={this.props.radioName} />
                     <span className="dot" id='bad'></span>
                 </label>
