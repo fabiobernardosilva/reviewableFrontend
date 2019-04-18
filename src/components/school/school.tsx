@@ -2,6 +2,7 @@ import React from 'react';
 import { Review } from '../review/review';
 import * as H from 'history';
 import { Header } from '../header/header';
+import { withRouter } from 'react-router-dom';
 
 interface ReviewItem {
     reviewId: number;
@@ -31,9 +32,10 @@ interface SchoolState {
     //reviews: ReviewItem[] | null;
     school: SchoolItem | null;
     
+    
 }
 
-export class School extends React.Component<any, SchoolState>{
+export class SchoolInternal extends React.Component<any, SchoolState>{
     public constructor(props: any) {
         super(props);   
         this.state = {
@@ -41,7 +43,7 @@ export class School extends React.Component<any, SchoolState>{
         };
     }
 
-    public componentWillMount() {
+    public componentDidMount() {
         (async () => {
             const data = await getSchoolById(this.props.match.params.id);
             this.setState({ school: data });
@@ -51,7 +53,9 @@ export class School extends React.Component<any, SchoolState>{
         })();
     }
 
-
+    private handleSubmit(id: number) {
+        this.props.history.push(`/review/${id}`)
+    }
 
     render() {
         
@@ -84,7 +88,7 @@ export class School extends React.Component<any, SchoolState>{
                         <div style={{ marginTop: "20px" }}>
                             <p style={{ textAlign: "right"}}>Total reviews: <strong>{totalReviewCount}</strong></p><br/>
                             <p style={{ textAlign: "right"}}>School verified: <strong>{totalReviewCount}</strong></p>
-                            <p style={{ textAlign: "right"}}>reviewable verified: <strong>0</strong></p>
+                            <p style={{ textAlign: "right"}}><strong></strong>reviewable verified: <strong>0</strong></p>
                         </div>
                     </div>
 
@@ -94,7 +98,8 @@ export class School extends React.Component<any, SchoolState>{
                     
                     <p style={{fontSize: "32px", margin: "30px 0px", textAlign: "center" }}><strong>{recommendationCount}</strong> {recommendationCount === 1 ? "student recommends" : "students recommend"} this school</p>
 
-                    <button onClick={() => { alert("TO DO") }}>Leave a review</button>
+                    <p style={{textAlign: "center", marginBottom: "-35px"}}>Did you study here?</p>
+                    <button onClick={() => { this.handleSubmit(this.props.match.params.id) }}>Leave a review</button>
 
                 </div>
                 <h2 style={{}} className="center">Reviews for {this.state.school.schoolName}</h2>
@@ -102,8 +107,6 @@ export class School extends React.Component<any, SchoolState>{
 
 
                     <Review
-                    
-                    
                         items={
                             this.state.school.reviews.reverse().map((reviews) => {
 
@@ -129,7 +132,6 @@ export class School extends React.Component<any, SchoolState>{
                                     <p style={{textAlign: "right"}}>{reviews.time.toString().slice(0,-14)}</p>
                                     </div>
                                     </div>
-                                  
 
                                     <p style={{ fontSize: 32, margin: "30px 0px"}}>{reviews.comment}</p>
                                     <div className="grid3">
@@ -150,6 +152,8 @@ export class School extends React.Component<any, SchoolState>{
         }
     }
 }
+
+export const School = withRouter(props => <SchoolInternal {...props} />);
 
 async function getSchoolById(id: number) {
     const response = await fetch(`/schools/${id}`);

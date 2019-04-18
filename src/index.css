@@ -1,3 +1,5 @@
+/* IDEA: COMMENT THE CSS IN SECTIONS FOR WHAT THE CODE DOES AND THEM DOCUMMENT IT! */
+
 @font-face {
   font-family: 'MiradorBold';
   src: url('./webfontkit-20190315-195300/rene_bieder_-_mirador_book_demo_bold-webfont.woff2') format('woff2'),
@@ -66,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2{
-  margin: 0px;
+  margin: 0;
 }
 
 .schoolName {
@@ -188,7 +190,7 @@ html{
 
   .contentSearch {
     padding: 10px;
-    height: 88vh;
+    height: 100vh;
   }
 
   .backgroundImage{
@@ -196,8 +198,8 @@ html{
     margin: 10px;
     padding-top: 25%;
 */
-    height: 75%;
-    
+    height: 50%;
+    padding: 12vh 0px;
   }
   
   .searchResults{

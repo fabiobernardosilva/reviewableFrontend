@@ -3,27 +3,85 @@ import { Question } from "../question/question";
 import * as joi from "joi";
 import * as H from 'history';
 import { Header } from '../header/header';
+import { withRouter } from 'react-router-dom';
 
 
 const identificationJoiSchema = {
     /* this validate the email input, the line minDomainAtoms: 2 makes sure
     that after the @ symbol the user needs to include another email sufix like .com or .co.uk (min: 2 after the @)*/
-    reviewerName: joi.string().required().label("Full name"),
-    email: joi.string().email({ minDomainAtoms: 2 }).required().label("Email address"),
-    dOB: joi.date().required().label("Date of birth")
+    reviewerName: joi.string().required().label("Full name").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "any.empty": err.message = "Full name is required";
+                break;
+            }
+        });
+        return errors;
+    }),
+    email: joi.string().email({ minDomainAtoms: 2 }).required().label("Email address").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "any.empty": err.message = "Email is required";
+                break;
+                case "string.email": err.message = "Please enter a valid email address"
+            }
+        });
+        return errors;
+    }),
+    dOB: joi.date().required().label("Date of birth").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "date.base": err.message = "Please enter a valid date";
+                break;
+            }
+        });
+        return errors;
+    })
 };
 
 const reviewJoiSchema = {
-    teacher: joi.number().min(1).max(5).required().label("Teacher"),
-    facilities: joi.number().min(1).max(5).required().label("Facilities"),
-    staff: joi.number().min(1).max(5).required().label("Staff"),
-    recommendation: joi.number().min(0).max(1).required().label("Recommendation")
+    teacher: joi.number().min(1).max(5).required().label("Teacher").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "number.min": err.message = "Please select an option for 'Teacher'";
+                break;
+            }
+        });
+        return errors;
+    }),
+    facilities: joi.number().min(1).max(5).required().label("Facilities").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "number.min": err.message = "Please select an option for 'Facilities'";
+                break;
+            }
+        });
+        return errors;
+    }),
+    staff: joi.number().min(1).max(5).required().label("Staff").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "number.min": err.message = "Please select an option for 'Staff'";
+                break;
+            }
+        });
+        return errors;
+    }),
+    recommendation: joi.number().min(0).max(1).required().label("Recommendation").error(errors => {
+        errors.forEach(err=>{
+            switch (err.type){
+                case "number.min": err.message = "Please select an option for 'Recommendation'";
+                break;
+            }
+        });
+        return errors;
+    })
 
 };
 
 interface QuestionnaireProps {
     school: string;
-    history?: H.History;
+   //history?: H.History;
 }
 
 interface QuestionnaireState {
@@ -38,7 +96,7 @@ interface QuestionnaireState {
     dOB: string;
 }   
 
-export class Questionnaire extends React.Component<any, QuestionnaireState>{
+export class QuestionnaireInternal extends React.Component<any, QuestionnaireState>{
     
     public constructor(props: any) {
         super(props);
@@ -188,8 +246,10 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
                 this.state.questionThree,
                 this.state.comment,
 
+                // ?
                 // this is the school id that must be passed as props
-                1,
+                this.props.match.params.id,
+                
 
                 // verification of the review, always set to -1 when a review is created
                 -1,
@@ -256,6 +316,8 @@ export class Questionnaire extends React.Component<any, QuestionnaireState>{
     }
 
 }
+
+export const Questionnaire = withRouter(props => <QuestionnaireInternal {...props} />);
 
 
 async function createReview(
