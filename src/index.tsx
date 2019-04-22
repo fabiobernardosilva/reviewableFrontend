@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
-import { Header } from './components/header/header';
+// import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Questionnaire } from './components/questionnaire/questionnaire';
 import { Success } from './components/success/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import { School } from './components/school/school';
-import { Search } from './components/search/search';
+import { School } from './pages/school';
+import { Search } from './pages/search';
 import {Page404} from './components/Page404/Page404';
 
 /*

@@ -25,7 +25,7 @@ export class Question extends React.Component<QuestionProps, QuestionState>{
     render() {
         if(this.props.numberOfOptions === 5){
         return <div>
-            <h3>{this.props.questionTitle} {this.props.school}<span style={{ color: 'red' }}>*</span></h3>
+            <h3>{this.props.questionTitle} {this.props.school}<span style={{ color: "#ff4a4a" }}>*</span></h3>
             <p>{this.props.questionDescription}</p>
 
             <div className='grid'>
@@ -60,12 +60,12 @@ export class Question extends React.Component<QuestionProps, QuestionState>{
                         <label/>
                         <label onClick={() => { this.getValue(1) }} className="gridContainer">Yes
                         <input type="radio" name={this.props.radioName} />
-                            <span className="dot" id='recommendation'></span>
+                            <span className="dot" id='recommendationYes'></span>
                         </label>
                         <label/>
                         <label onClick={() => { this.getValue(0) }} className="gridContainer">No
                         <input type="radio" name={this.props.radioName} />
-                            <span className="dot" id='recommendation'></span>
+                            <span className="dot" id='recommendationNo'></span>
                         </label>
                         <label/>
                     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../reviewable_logo.png';
+import logo from '../../images/reviewable_logo.png';
 
 interface FooterProps { }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../reviewable_brand.png';
+import logo from '../../images/reviewable_brand.png';
 
 interface HeaderProps {
    

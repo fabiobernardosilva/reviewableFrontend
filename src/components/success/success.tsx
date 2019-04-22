@@ -1,6 +1,6 @@
 import React from 'react';
-import facebookLogo from '../../facebook_logo.svg';
-import twitterLogo from '../../twitter_logo.svg';
+import facebookLogo from '../../images/facebook_logo.svg';
+import twitterLogo from '../../images/twitter_logo.svg';
 import { Header } from '../header/header';
 
 
@@ -21,7 +21,8 @@ export class Success extends React.Component<SuccessProps, SuccessState> {
             <h1 className='center'>Success!</h1>
             <p className='center'>Thank you for taking part into making the International
             Language Market more transparent! Your review is under
-            revision by {this.props.school} and you will be contacted by
+            revision by the English school and 
+             you will be contacted by
             email once your review is accepted.</p>
             <h3 className='center'>Spread the word!</h3>
             <div className='centerDiv'>

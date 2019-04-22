@@ -1,32 +1,67 @@
 /* IDEA: COMMENT THE CSS IN SECTIONS FOR WHAT THE CODE DOES AND THEM DOCUMMENT IT! */
 
+/*  
+	CSS Reset by Eric Meyer - Released under Public Domain
+    http://meyerweb.com/eric/tools/css/reset/
+*/
+
+/*
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, 
+caption, tbody, tfoot, thead, tr, th, td 
+                  {margin: 0;padding: 0;border: 0;outline: 0;
+                  font-size: 100%;vertical-align: baseline;
+                  background: transparent;}
+body              {line-height: 1;}
+ol, ul            {list-style: none;}
+blockquote, q     {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '';	content: none;}
+:focus            {outline: 0;}
+ins               {text-decoration: none;}
+del               {text-decoration: line-through;}
+table             {border-collapse: collapse;border-spacing: 0;}
+*/
+
+/* Resets whole file to border-box system and using Mirador font */
+* {
+  box-sizing: border-box;
+  font-family: 'Mirador';
+}
+
+/* Font specification */
 @font-face {
   font-family: 'MiradorBold';
-  src: url('./webfontkit-20190315-195300/rene_bieder_-_mirador_book_demo_bold-webfont.woff2') format('woff2'),
-       url('./webfontkit-20190315-195300/rene_bieder_-_mirador_book_demo_bold-webfont.woff') format('woff');
+  src: url('./fonts/rene_bieder_-_mirador_book_demo_bold-webfont.woff2') format('woff2'),
+       url('./fonts/rene_bieder_-_mirador_book_demo_bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: bold;
 }
 
 @font-face {
   font-family: 'Mirador';
-  src: url('./webfontkit-20190315-195300/rene_bieder_-_mirador-bookdemo-webfont.woff2') format('woff2'),
-       url('./webfontkit-20190315-195300/rene_bieder_-_mirador-bookdemo-webfont.woff') format('woff');
+  src: url('./fonts/rene_bieder_-_mirador-bookdemo-webfont.woff2') format('woff2'),
+       url('./fonts/rene_bieder_-_mirador-bookdemo-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-img, button, label{
+/* Disabling text selection */
+img, button, label, br {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-     -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-          user-select: none; /* Non-prefixed version, currently
-                                supported by Chrome and Opera */
-
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+/* Pointer cursor */
 button, .searchResults {
   cursor: pointer;
 }
@@ -47,24 +82,21 @@ h1{
   font-size:
 } */
 
+/* Yellow color text selection */
 ::selection {
-  background: #ffeb5a; /* WebKit/Blink Browsers */
+  background: #ffeb5a;
 }
 ::-moz-selection {
-  background: #ffeb5a; /* Gecko Browsers */
+  background: #ffeb5a;
 }
 
 p{
- margin: 0;
-
+  margin: 0;
   color: #11003f;
-  
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, label{
   color: #11003f;
-
-
 }
 
 h2{
@@ -88,99 +120,96 @@ html{
 }
 
 .content{
-  /*
-  background-color: cornflowerblue;
-  */
   background-color: gainsboro;
   padding: 0px 50px;
   height: 100vh;
   overflow: scroll;
   /*
-  THE BEST EASIEST WAY TO VERTICALLY ALIGN!
+  THE BEST AND EASIEST WAY TO VERTICALLY ALIGN!
   */
   display: grid;
 }
 
+
+
+.questionnaire {
+  max-width: 800px;
+  width: 97%;
+  background-color: white;    
+  padding: 25px 50px 50px 50px;
+  border-radius: 0px;
+  margin: 50px auto;
+}
+
+.reviewCard {
+  max-width: 800px;  
+  color: #11003f;
+  background-color: white;
+  padding: 50px;
+  margin: 25px 0px 0px 0px;
+}
+
+.reviewCardList {
+  display: grid;
+  row-gap: 25px;
+  max-width: 800px;
+  width: 97%;
+  border-radius: 0px;
+  margin: 25px auto 50px auto;  
+}
+
+.searchBar{
+  background-color: white;
+  width: 75%;
+  border-radius: 30px;
+}
+
+.searchResults{
+  margin-Top: 5px;
+  background-Color: white;
+  width: 75%;
+  margin-Left: auto;
+  margin-Right: auto;
+  border-Radius: 25px; 
+}
+
 .contentSearch {
   background-color: gainsboro;
-  height: 75vh;
+  height: 100vh;
   width: 100%;
-  padding: 25px;
+  padding: 25px 50px;
+  overflow: scroll;
 
 }
 
-  .questionnaire {
-    max-width: 800px;
-    width: 97%;
-    background-color: white;
-    
-    padding: 25px 50px 50px 50px;
-    border-radius: 0px;
-    margin: 50px auto;
-    /* box-shadow: 2px 2px 3px grey; */
+.backgroundImage{
+  text-align: center;
+  background-image: url('./images/education_2.jpg');
+  width: auto;
+  height: 45%;
+  background-size: cover;
+  margin-Bottom: -25px;
+}
 
-   
-  }
+.floating {
+  width: 33%;
+  float: left;
+  margin-bottom: 50px;
+  padding: 0 50px;
+}
 
-  .reviewCard {
-    max-width: 800px;
-    
+i {
   color: #11003f;
-  background-color: white;
-    
-    padding: 50px;
-    
-    margin: 25px 0px 0px 0px;
+}
+
+@media only screen and (max-width: 800px){
+
+  .floating {
+    clear: left;
+    width: 100%;
+    padding: 0 12.5px;
   }
-
-  .reviewCardList {
-    display: grid;
-
-    row-gap: 25px;
-
-    max-width: 800px;
-    
-    width: 97%;
-    
-    
-    
-    border-radius: 0px;
-    margin: 25px auto 50px auto;
-    
-  }
-
-  .searchBar{
-    background-color: white;
-    width: 75%;
-    border-radius: 30px;
-    /* opacity: 0.75; */
-  }
-
-  .searchResults{
-    margin-Top: 5px;
-    /* opacity: 0.75; */
-    background-Color: white;
-    width: 75%;
-    margin-Left: auto;
-    margin-Right: auto;
-    border-Radius: 25px;
-    
-  }
-
-  .backgroundImage{
-    /*
-    margin: 50px 0px;
-    padding-top: 25%;*/
-    
-    text-align: center;
-    background-image: url('./education_2.jpg');
-    width: auto;
-    height: 100%;
-    background-size: cover;
-    padding: 20vh 0px;
-    /* opacity: 0.75; */
-    
-  }
+}
 
 @media only screen and (max-width: 600px) {
 
@@ -189,17 +218,11 @@ html{
   }
 
   .contentSearch {
-    padding: 10px;
-    height: 100vh;
+    padding: 10px 25px;
   }
 
   .backgroundImage{
-    /*
-    margin: 10px;
-    padding-top: 25%;
-*/
-    height: 50%;
-    padding: 12vh 0px;
+    height: 30%;
   }
   
   .searchResults{
@@ -234,20 +257,10 @@ html{
     margin: -15px 10px 10px 10px;
   }
 
-  
-}
-
+} 
 
 h1, h2, h3, h4, h5, h6, strong {
   font-family: 'MiradorBold';
-  /*
-  color: #11003f;
-  */
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'Mirador';
 }
 
 body {
@@ -259,14 +272,11 @@ body {
   min-width: 500px;
 }
 
-code {
+/* TO BE DELETED */
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-
-
-
+} */
 
 .footer {
   margin: 0;
@@ -274,8 +284,6 @@ code {
   width: 100%;
   background-color: #11003f;
   padding: 15px;
-  /*padding: 0px 20px;*/
-  
 }
 
 .success{
@@ -284,15 +292,11 @@ code {
   margin: auto;
   padding: 25px 50px 50px 50px;
   border-radius: 0px;
-    text-align:center;
+  text-align:center;
 }
-
-
 
 textarea:focus, button:focus, input:focus {
   outline: none;
-  /*background-color: #00ff9d;*/
-  
 }
 
 button:hover {
@@ -311,7 +315,6 @@ textarea {
   resize: none;
   color: #11003f;
 }
-
 
 input {
   margin: 0px 0px 0px 0px;
@@ -332,17 +335,17 @@ a {
 
 ::-webkit-input-placeholder { /* Edge */
   color: #11003f;
-  opacity: 0.75;
+  /* opacity: 0.75; */
 }
 
 :-ms-input-placeholder { /* Internet Explorer */
   color: #11003f;
-  opacity: 0.75;
+  /* opacity: 0.75; */
 }
 
 ::placeholder {
   color: #11003f;
-  opacity: 0.75;
+  /* opacity: 0.75; */
 }
 
 button{
@@ -362,11 +365,22 @@ button{
   
 }
 
+.validation {
+  padding: 10px;
+  background-color: rgba(255,74,74, 0.10);
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
 .grid {
   margin: 25px 0px 50px 0px;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  
 }
 
 .grid2 {
@@ -409,12 +423,12 @@ select {
   opacity: 1;
   position: relative;
   top: 5px;
+  cursor: pointer;
 }
 
 .dot:hover, .checkbox:hover{
   opacity:1;
 }
-
 
 #excellent {
   border: 2px solid #00ff9d;
@@ -443,15 +457,19 @@ select {
 .style5 {
   color: #00ff9d;
 }
+
 .style4 {
   color: #7bff5f;
 }
+
 .style3 {
   color: #ffeb5a;
 }
+
 .style2 {
   color: #ff9239;
 }
+
 .style1 {
   color: #ff4a4a;
 }
@@ -464,16 +482,10 @@ select {
   text-align: center;
 }
 
-
-
 .centerDiv{
   display: inline;
   margin-left: auto;
   margin-right:auto;
-  /*
-  display: grid;
-  grid-template-columns: 50% 50%
-  */
 }
 
 .centerDiv img {
@@ -493,10 +505,44 @@ margin: 0px 10px;
   width: 0;
 }
 
-.gridContainer input:checked ~ #excellent {
-  background-color:  #00ff9d;
+.checkboxContainer  input{
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
+.checkboxContainer input:checked ~ .checkbox{
+  background-color: #00ff9d;;
+}
+
+.checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxContainer input:checked ~ .checkbox:after {
+  display: block;
+}
+
+.checkboxContainer .checkbox:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  
+}
+
+.gridContainer input:checked ~ #excellent {
+  background-color:  #00ff9d;
+
+}
 
 .gridContainer input:checked ~ #good{
   background-color:  #7bff5f;
@@ -506,20 +552,27 @@ margin: 0px 10px;
   background-color:  #ffeb5a;
 }
 
-
 .gridContainer input:checked ~ #poor{
   background-color:  #ff9239;
 }
 
-
 .gridContainer input:checked ~ #bad {
   background-color:  #ff4a4a;
 
-}
-
-.gridContainer input:checked ~ #recommendation {
-  background-color: gainsboro;
 
 }
 
+.gridContainer input:checked ~ #recommendationYes {
+  background-color:  #00ff9d;
+  border: 2px solid #00ff9d;
+}
+
+.gridContainer input:checked ~ #recommendationNo {
+  background-color:  #ff4a4a;
+  border: 2px solid  #ff4a4a
+}
+
+.highlight {
+  font-family: "MiradorBold"
+}
 
