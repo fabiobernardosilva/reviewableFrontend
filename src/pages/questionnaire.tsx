@@ -1,8 +1,8 @@
 import React from 'react';
-import { Question } from "../question/question";
+import { Question } from "../components/question/question";
 import * as joi from "joi";
-//import * as H from 'history';
-import { Header } from '../header/header';
+import * as H from 'history';
+import { Header } from '../components/header/header';
 import { withRouter } from 'react-router-dom';
 
 
@@ -108,8 +108,8 @@ interface ReviewItem {
 }
 
 interface QuestionnaireProps {
-    school: string;
-   //history?: H.History;
+    schoolId: number;
+    history: H.History;
 }
 
 interface QuestionnaireState {
@@ -126,9 +126,9 @@ interface QuestionnaireState {
     dOB: string;
 }   
 
-export class QuestionnaireInternal extends React.Component<any, QuestionnaireState>{
+export class QuestionnaireInternal extends React.Component<QuestionnaireProps, QuestionnaireState>{
     
-    public constructor(props: any) {
+    public constructor(props: QuestionnaireProps) {
         super(props);
         this.state = {
             school: null,
@@ -163,7 +163,7 @@ export class QuestionnaireInternal extends React.Component<any, QuestionnaireSta
 
     public componentDidMount() {
         (async () => {
-            const data = await getSchoolById(this.props.match.params.id);
+            const data = await getSchoolById(this.props.schoolId);
             this.setState({ school: data });
 
            
@@ -311,7 +311,7 @@ export class QuestionnaireInternal extends React.Component<any, QuestionnaireSta
 
     private handleSubmit() {
         try {
-            this.props.history.push("/success/")
+            this.props.history.push("/success")
             // createReview(
             //     this.state.reviewerName,
             //     this.state.email,
@@ -394,7 +394,7 @@ export class QuestionnaireInternal extends React.Component<any, QuestionnaireSta
 
 }
 
-export const Questionnaire = withRouter(props => <QuestionnaireInternal {...props} />);
+export const Questionnaire = withRouter(props => <QuestionnaireInternal history={props.history} schoolId={props.match.params.id} />);
 
 
 async function createReview(

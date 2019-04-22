@@ -7,12 +7,12 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 // import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
-import { Questionnaire } from './components/questionnaire/questionnaire';
-import { Success } from './components/success/success'
+import { Questionnaire } from './pages/questionnaire';
+import { Success } from './pages/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { School } from './pages/school';
 import { Search } from './pages/search';
-import {Page404} from './components/Page404/Page404';
+import {Page404} from './pages/Page404';
 
 /*
 const school = "ABCD English";

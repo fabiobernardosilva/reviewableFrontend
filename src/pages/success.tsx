@@ -1,7 +1,7 @@
 import React from 'react';
-import facebookLogo from '../../images/facebook_logo.svg';
-import twitterLogo from '../../images/twitter_logo.svg';
-import { Header } from '../header/header';
+import facebookLogo from '../images/facebook_logo.svg';
+import twitterLogo from '../images/twitter_logo.svg';
+import { Header } from '../components/header/header';
 
 
 interface SuccessProps {
