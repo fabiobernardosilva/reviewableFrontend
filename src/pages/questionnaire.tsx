@@ -312,30 +312,31 @@ export class QuestionnaireInternal extends React.Component<QuestionnaireProps, Q
     private handleSubmit() {
         try {
             // this.props.history.push(`/success/${this.props.schoolId}`)
-            this.props.history.push(`/success`)
-            // createReview(
-            //     this.state.reviewerName,
-            //     this.state.email,
-            //     this.state.dOB,
+            
+            createReview(
+                this.state.reviewerName,
+                this.state.email,
+                this.state.dOB,
                 
-            //     this.state.recommendation,
-            //     this.state.questionOne,
-            //     this.state.questionTwo,
-            //     this.state.questionThree,
-            //     this.state.comment,
+                this.state.recommendation,
+                this.state.questionOne,
+                this.state.questionTwo,
+                this.state.questionThree,
+                this.state.comment,
 
-            //     // ?
-            //     // this is the school id that must be passed as props
-            //     this.props.match.params.id,
+                // ?
+                // this is the school id that must be passed as props
+                this.props.schoolId,
                 
 
-            //     // verification of the review, always set to -1 when a review is created
-            //     -1,
+                // verification of the review, always set to -1 when a review is created
+                -1,
 
-            //     // post status of review: set to null until verified and posted
-            //     -1
-            //     );
-            //     //alert(JSON.stringify(data));
+                // post status of review: set to null until verified and posted
+                -1
+                );
+                //alert(JSON.stringify(data));
+                this.props.history.push(`/success`)
         
         }catch(err){
             console.log(err);
@@ -428,7 +429,7 @@ async function createReview(
         postStatus: postStatus
     };
     
-    const response = await fetch("/reviews",
+    const response = await fetch("/api/v1/reviews/",
         {
             method: "POST",
             headers: {
