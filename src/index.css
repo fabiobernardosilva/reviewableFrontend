@@ -164,6 +164,7 @@ html{
   border-radius: 30px;
 }
 
+
 .searchResults{
   margin-Top: 5px;
   background-Color: white;
@@ -171,25 +172,34 @@ html{
   margin-Left: auto;
   margin-Right: auto;
   border-Radius: 25px; 
+  z-index: 100;
 }
+
 
 .contentSearch {
   background-color: gainsboro;
   height: 100vh;
   width: 100%;
-  padding: 25px 50px;
+  padding: 25px;
   overflow: scroll;
-
 }
 
 .backgroundImage{
   text-align: center;
-  background-image: url('./images/education_2.jpg');
+  background-image: url('./images/education_5.jpg');
+  /* padding: 0px 50px; */
   width: auto;
-  height: 45%;
+  height: 100%; 
+  /* height: 85vh; */
   background-size: cover;
-  margin-Bottom: -25px;
+  /* margin-Bottom: -25px; */
+  padding: 35vh 0px;
 }
+
+/* .backgroundImage:hover{
+  margin-Bottom: 50px;
+  margin-Top: 100px;
+} */
 
 .floating {
   width: 33%;
@@ -212,17 +222,27 @@ i {
 }
 
 @media only screen and (max-width: 600px) {
-
   h2{
     margin: 12px;
   }
 
+  /* .logoHome{
+    margin-Top: -47px;
+  } */
+
   .contentSearch {
-    padding: 10px 25px;
+    padding: 10px 10px;
+    height: 625px;
   }
 
+  /* .searchBarHome {
+    margin-Top: 70px;
+  } */
+
   .backgroundImage{
-    height: 30%;
+    /* border: 2px solid salmon; */
+    height: 51%;
+    padding: 74.5px 0px;
   }
   
   .searchResults{
@@ -409,7 +429,7 @@ select {
   opacity: 1;
   margin-top: 10px;
   cursor: pointer;
-  border: 2px solid gainsboro;
+  border: 2px solid  #11003f;;
 }
 
 .checkbox {
@@ -563,13 +583,13 @@ margin: 0px 10px;
 }
 
 .gridContainer input:checked ~ #recommendationYes {
-  background-color:  #00ff9d;
-  border: 2px solid #00ff9d;
+  border: 2px solid #11003f;
+  background-color:   #11003f;
 }
 
 .gridContainer input:checked ~ #recommendationNo {
-  background-color:  #ff4a4a;
-  border: 2px solid  #ff4a4a
+  border: 2px solid #11003f;
+  background-color:   #11003f;
 }
 
 .highlight {

@@ -173,7 +173,12 @@ export class QuestionnaireInternal extends React.Component<QuestionnaireProps, Q
 
     render() {
         if(this.state.school === null){
-            return <div>EYE ROLL</div>
+            return <div>
+                <Header />
+                <div className='content'>
+                    <h1 style={{ textAlign: "center"}}>Loading...</h1>
+                </div>
+            </div>
         } else {
             const localSchoolName = this.state.school.schoolName;
         
@@ -265,8 +270,8 @@ export class QuestionnaireInternal extends React.Component<QuestionnaireProps, Q
                     <input type='date' onChange={(e) => this.updateDOB((e as any).target.value)}placeholder=''></input>
 
                     
-                    <p><label onClick={() => {this.handleTermsConditions(this.state.termsConditions)}} className="checkboxContainer">
-                        <input type="checkbox"></input>
+                    <p><label className="checkboxContainer">
+                        <input onChange={() => this.toggleTermsConditions()} type="checkbox"></input>
                         <span className="checkbox"></span>
                     </label> I have read and accept reviewable's <a onClick={() => { alert('TO DO'); }} href=''>Terms and Conditions</a> and <a onClick={() => { alert('TO DO'); }} href=''>Privacy Policy</a>.</p>
                     <br/>
@@ -279,15 +284,10 @@ export class QuestionnaireInternal extends React.Component<QuestionnaireProps, Q
         }
     }   }
 
-    private handleTermsConditions(value: number){
-        //const prevState = this.state.termsConditions;
-        if(value === 0){
-            this.setState({termsConditions: 1});
-        // } else {
-        //     this.setState({termsConditions: 0});
-        }
-       
-        
+    private toggleTermsConditions(){
+        const prevState = this.state.termsConditions;
+        const newVal = prevState === 1 ? 0 : 1;
+        this.setState({termsConditions: newVal});    
     }
 
     private renderReviewValidationErrors() {
@@ -311,7 +311,8 @@ export class QuestionnaireInternal extends React.Component<QuestionnaireProps, Q
 
     private handleSubmit() {
         try {
-            this.props.history.push("/success")
+            // this.props.history.push(`/success/${this.props.schoolId}`)
+            this.props.history.push(`/success`)
             // createReview(
             //     this.state.reviewerName,
             //     this.state.email,
@@ -441,7 +442,7 @@ async function createReview(
 };
 
 async function getSchoolById(id: number) {
-    const response = await fetch(`/schools/${id}`);
+    const response = await fetch(`/api/v1/schools/${id}`);
     const json = await response.json();
     return json as SchoolItem;
 };

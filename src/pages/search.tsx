@@ -22,7 +22,7 @@ interface SearchState {
 }
 
 export class SearchInternal extends React.Component<SearchProps, SearchState>{
-    
+
     public constructor(props: SearchProps) {
         super(props);
         this.state = {
@@ -45,90 +45,97 @@ export class SearchInternal extends React.Component<SearchProps, SearchState>{
         if (this.state.school === null) {
             return <div>loading ...</div>
         } else {
-            
-            return <div >
-                {/* <Header/> */}
-            {/* //className="content"> */}
-            <div style={{textAlign: "center"}}className='contentSearch'>
-            <div style={{marginBottom: "-63px"}}> <img style={{border: "0px solid green", margin: "0 auto 10px auto"}}src={logo} height='35px;'/><br/>  
-            <label><h3 style={{ 
-                //visibility: "hidden",
-                border: "0px solid green", fontWeight: "lighter" , margin: "0 auto 15px auto"}}>Verified reviews from real students</h3></label></div>
-            <div className="backgroundImage"></div>
-           
-            <input placeholder="Find your school here" style={{ paddingLeft: "25px", textAlign: "left" }} className="searchBar" onKeyUp={(e) => this.handleChange((e as any).target.value)} type="text"></input>
-            
- 
-                <div className="searchResults">
-                {this.state.searchResult.map((school) => {
 
+            return <div>
+                {/* className="content">*/}
+                <div style={{ textAlign: "center" }} className='contentSearch'>
 
-                return <div style={{opacity: 1, width: "90%", marginLeft: "auto", marginRight: "auto"}} onClick={() => { this.handleSubmit(school.schoolId) }}>
-                    <p style={{ fontSize: "28px", lineHeight: "40px"}}>{school.schoolName}  <span style={{fontSize: "14px"}}> | {school.website}</span></p>
-                    </div>
-                    })
-                }
+                    <div className="backgroundImage">
 
-                {/* 
-                {this.renderResults()}
-                */}
-                </div>
-                <div>
-                    <h2 style={{margin: "50px 0px", textAlign: "center"}}>How does reviewable work?</h2>
-                    <div
-                    // className="grid3"
-                    >
-                    
-                    <div className="floating" ><i style ={{marginBottom: "25px"}} className="fas fa-comment fa-lg"/><br/>
-                    <p style={{textAlign: "left"}}>You review your school on reviewable, assessing your teacher, facilities and the staff and can also leave an in-depth comment of your experience.</p></div>
-                   
-                    <div className="floating" ><i style ={{marginBottom: "25px"}} className="fas fa-clock fa-lg"/><br/>
-                    <p style={{textAlign: "left"}}>The school then, has 72 hours to accept or deny a review based on the student's identity ONLY. The content of the review is not revealed to the school until accepted.</p></div>
-                    
-                    <div className="floating" ><i style ={{marginBottom: "25px"}} className="fas fa-hand-peace fa-lg"/><br/>
-                    <p style={{textAlign: "left"}}><strong>Once accepted, the review is published on reviewable, where other students will be able to see and use in their research.</strong></p></div>
+                        <div className="logoHome">
+
+                            {/* style={{ marginBottom: "-63px" }}> */}
+                            <img style={{ border: "0px solid green", margin: "0 auto 10px auto" }} src={logo} height='35px;' /><br />
+                            <label><h3 style={{
+                                //visibility: "hidden",
+                                border: "0px solid green", fontWeight: "lighter", margin: "0 auto 15px auto"
+                            }}>Verified reviews from real students</h3>
+                            </label>
+                        </div>
+                        <div className="searchBarHome">
+
+                            <input placeholder="Find your school here" style={{ paddingLeft: "25px", textAlign: "left" }} className="searchBar" onKeyUp={(e) => this.handleChange((e as any).target.value)} type="text"></input>
+                            <div className="searchResults">
+                                {this.state.searchResult.map((school) => {
+
+                                    return <div style={{ opacity: 1, width: "90%", marginLeft: "auto", marginRight: "auto" }} onClick={() => { this.handleSubmit(school.schoolId) }}>
+                                        <p style={{ fontSize: "28px", lineHeight: "40px" }}>{school.schoolName}  <span style={{ fontSize: "14px" }}> | {school.website}</span></p>
+                                    </div>
+                                })
+                                }
+                            </div>
+                            {/* 
+                        {this.renderResults()}
+                        */}
+                        </div>
                     </div>
 
-                    <h2 style={{clear: "left", margin: "50px 0px", textAlign: "center"}}>What if my review is not accepted?</h2>
-                    <div className="">
-                    <div className="floating"><p></p></div>
+                    <div >
+                    {/*style={{ marginTop: "25%" }}>*/}
+                        <h2 style={{ margin: "50px 0px", textAlign: "center" }}>How does reviewable work?</h2>
+                        <div
+                        // className="grid3"
+                        >
+
+                            <div className="floating" ><i style={{ marginBottom: "25px" }} className="fas fa-comment fa-lg" /><br />
+                                <p style={{ textAlign: "left" }}>You review your school on reviewable, assessing your teacher, facilities and the staff and can also leave an in-depth comment of your experience.</p></div>
+
+                            <div className="floating" ><i style={{ marginBottom: "25px" }} className="fas fa-clock fa-lg" /><br />
+                                <p style={{ textAlign: "left" }}>The school then, has 72 hours to accept or deny a review based on the student's identity ONLY. The content of the review is not revealed to the school until accepted.</p></div>
+
+                            <div className="floating" ><i style={{ marginBottom: "25px" }} className="fas fa-hand-peace fa-lg" /><br />
+                                <p style={{ textAlign: "left" }}><strong>Once accepted, the review is published on reviewable, where other students will be able to see and use in their research.</strong></p></div>
+                        </div>
+
+                        <h2 style={{ clear: "left", margin: "50px 0px", textAlign: "center" }}>What if my review is not accepted?</h2>
+                        <div className="">
+                            <div className="floating"><p></p></div>
 
 
-                    <div className="floating"><i style ={{marginBottom: "25px"}} className="far fa-file-alt fa-lg"/><br/>
-                    <p style={{textAlign: "left"}}>If a review is denied or not accepted in time, the student is notified and offered the option to provide documents and be verified by reviewable.</p></div>
-                    
-                    <div className="floating"><p></p></div>
-                    </div>
+                            <div className="floating"><i style={{ marginBottom: "25px" }} className="far fa-file-alt fa-lg" /><br />
+                                <p style={{ textAlign: "left" }}>If a review is denied or not accepted in time, the student is notified and offered the option to provide documents and be verified by reviewable.</p></div>
+
+                            <div className="floating"><p></p></div>
+                        </div>
 
 
-                    <h2 style={{clear: "left", margin: "50px 0px", textAlign: "center"}}>Why reviewable?</h2>
-                    <div className="">
-                    <div className="floating"><p></p></div>
-                    <div className="floating">
-                    <i style ={{marginBottom: "25px"}} className="fas fa-check-circle fa-lg"></i><i style ={{marginBottom: "25px"}} className="far fa-check-circle fa-lg"></i>
-                    <p style={{textAlign: "left"}}>reviewable it is the only review system that shows <strong>how many reviews were received to each school</strong>,
+                        <h2 style={{ clear: "left", margin: "50px 0px", textAlign: "center" }}>Why reviewable?</h2>
+                        <div className="">
+                            <div className="floating"><p></p></div>
+                            <div className="floating">
+                                <i style={{ marginBottom: "25px" }} className="fas fa-check-circle fa-lg"></i><i style={{ marginBottom: "25px" }} className="far fa-check-circle fa-lg"></i>
+                                <p style={{ textAlign: "left" }}>reviewable it is the only review system that shows <strong>how many reviews were received to each school</strong>,
                         <strong> how many reviews were accepted by the school</strong> and <strong>how many were only verified by reviewable</strong>.
                         It gives future students information that helps in the decision making process.</p></div>
-                    <div className="floating"><p></p></div>
-                    </div>
+                            <div className="floating"><p></p></div>
+                        </div>
 
-                    <div style={{clear: "left"}}>
+                        <div style={{ clear: "left" }}>
 
-                    
-                    {/* <p style={{ textAlign: "center", marginBottom: "-35px" }}>Did you study here?</p>
+
+                            {/* <p style={{ textAlign: "center", marginBottom: "-35px" }}>Did you study here?</p>
                         <button onClick={() => { alert("TO DO") }}>Leave a review</button> */}
 
-                    </div>
-                   
-                    
-                    
-                </div>
-                {/* <label><h3 style={{ border: "0px solid green", fontWeight: "lighter" , margin: "0 auto 15px auto"}}>Verified reviews from real students</h3></label> */}
+                        </div>
 
+
+
+                    </div>
+                    {/* <label><h3 style={{ border: "0px solid green", fontWeight: "lighter" , margin: "0 auto 15px auto"}}>Verified reviews from real students</h3></label> */}
+                </div>
             </div>
-            
-            </div>
-            
+            // </div >
+            // </div>
         }
     }
 
@@ -171,7 +178,7 @@ export const Search = withRouter(props => <SearchInternal {...props} />);
 
 
 async function getAllSchools() {
-    const response = await fetch("/schools");
+    const response = await fetch("/api/v1/schools");
     const json = await response.json();
     return json as School[];
 };

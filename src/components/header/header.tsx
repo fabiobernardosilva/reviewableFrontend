@@ -1,11 +1,8 @@
 import React from 'react';
 import logo from '../../images/reviewable_brand.png';
 
-interface HeaderProps {
-   
+interface HeaderProps {   
 }
-
-
 
 interface HeaderState { }
 

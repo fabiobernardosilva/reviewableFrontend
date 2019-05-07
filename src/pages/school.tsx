@@ -171,7 +171,7 @@ export class SchoolInternal extends React.Component<SchoolProps, SchoolState>{
 export const School = withRouter(props => <SchoolInternal history={props.history} schoolId={props.match.params.id} />);
 
 async function getSchoolById(id: number) {
-    const response = await fetch(`/schools/${id}`);
+    const response = await fetch(`/api/v1/schools/${id}`);
     const json = await response.json();
     return json as SchoolItem;
 };

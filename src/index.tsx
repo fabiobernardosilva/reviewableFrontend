@@ -12,7 +12,10 @@ import { Success } from './pages/success'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { School } from './pages/school';
 import { Search } from './pages/search';
+
 import {Page404} from './pages/Page404';
+import { Login } from './pages/login';
+import { Profile } from './pages/profile';
 
 /*
 const school = "ABCD English";
@@ -74,9 +77,11 @@ ReactDOM.render(<BrowserRouter>
     <Route path="/success" render={()=><Success school="ABCD Dublin English"/>}/>
     <Route exact path="/schools/:id" render={() => <School schoolId={1}></School>}/>
     */}
-    <Route path="/review/:id" component={Questionnaire}/>
-    <Route path="/success" component={Success}/>
+    <Route exact path="/review/:id" component={Questionnaire}/>
+    <Route exact path="/success" component={Success}/>
     <Route exact path="/schools/:id" component={School}/>
+    <Route exact path="/login" component={Login}/>
+    <Route exact path="/profile" component={Profile}/>
     <Route component={Page404} />
 </Switch>
 {/* </div> */}
